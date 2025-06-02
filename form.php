@@ -1,3 +1,0 @@
-<?
-#PHP Form.php
-?>

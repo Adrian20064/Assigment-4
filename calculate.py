@@ -1,1 +1,0 @@
-#python calculate.py

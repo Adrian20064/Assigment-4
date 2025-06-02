@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora Condicional</title>
+  </head>
+  <body>
+    <h1>Formulario de Cálculo</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Calcular</button>
+    </form>
+
+    {% if error %}
+    <p style="color: red"><strong>Error:</strong> {{ error }}</p>
+    {% endif %} {% if result %}
+    <div style="margin-top: 20px">{{ result|safe }}</div>
+    {% endif %}
+  </body>
+</html>
