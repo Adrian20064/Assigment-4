@@ -13,13 +13,12 @@ def calculate_view(request):
             b = form.cleaned_data['b']
             c = form.cleaned_data['c']
 
-            # Validaciones personalizadas
             if not all(isinstance(x, (int, float)) for x in [a, b, c]):
-                error = "Todos los valores deben ser numéricos."
+                error = "All values must be numeric."
             elif a < 1:
-                error = "El valor de 'a' es demasiado pequeño. Debe ser mayor o igual a 1."
+                error = "The value of 'a' is too small. It must be at least 1."
             elif c < 0:
-                error = "El valor de 'c' no puede ser negativo."
+                error = "The value of 'c' cannot be negative."
             else:
                 c_cubed = c ** 3
                 calculation_result = 0
@@ -30,28 +29,27 @@ def calculate_view(request):
                     try:
                         calculation_result = math.sqrt(c_cubed) / a
                     except ZeroDivisionError:
-                        error = "División por cero en la operación con 'a'."
+                        error = "Division by zero occurred with 'a'."
 
                 if not error:
                     calculation_result += b
                     if b == 0:
-                        message = "Nota: 'b' es 0, no afectará el resultado."
-                else:
-                    message = "Cálculo completado exitosamente."
+                        message = "Note: 'b' is 0 and won't affect the result."
+                    else:
+                        message = "Calculation completed successfully."
 
                     result = f"""
-                        <h2>Resultado</h2>
-                        <p><strong>Valor de a:</strong> {a}</p>
-                        <p><strong>Valor de b:</strong> {b}</p>
-                        <p><strong>Valor de c:</strong> {c}</p>
+                        <h2>Result</h2>
+                        <p><strong>Value of a:</strong> {a}</p>
+                        <p><strong>Value of b:</strong> {b}</p>
+                        <p><strong>Value of c:</strong> {c}</p>
                         <p><strong>c³:</strong> {c_cubed}</p>
-                        <p><strong>Resultado final:</strong> {calculation_result:.2f}</p>
+                        <p><strong>Final result:</strong> {calculation_result:.2f}</p>
                         <p>{message}</p>
                     """
         else:
-            error = "Formulario no válido. Verifica los campos."
+            error = "Invalid form. Please check your input."
     else:
         form = InputForm()
 
     return render(request, 'calculator/result.html', {'form': form, 'result': result, 'error': error})
-
