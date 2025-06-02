@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
   <body>
-    <h1>Formulario de Cálculo</h1>
+    <h1>Django Calculator</h1>
     <form method="post">
       {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Calcular</button>
+      <button type="submit">Calculate</button>
     </form>
 
     {% if error %}
